@@ -8,9 +8,7 @@ import { fetchCurrentWeatherByGPS } from '../actions/index';
 import HeaderContainer from '../containers/HeaderContainer';
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators(fetchCurrentWeatherByGPS, dispatch)
-    };
+    return bindActionCreators({fetchCurrentWeatherByGPS}, dispatch);
 };
 
 const mapStateToProps = (state) => {
@@ -27,7 +25,7 @@ class App extends Component {
             return;
         }
         navigator.geolocation.getCurrentPosition((position) => {
-            fetchCurrentWeatherByGPS(position);
+            this.props.fetchCurrentWeatherByGPS(position);
         });
     }
 
