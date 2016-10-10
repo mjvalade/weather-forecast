@@ -8,13 +8,17 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 import rootReducer from './reducers/root-reducer';
+import localWeatherReducer from './reducers/local-weather';
 
 require("!style!css!sass!./style/styles.scss");
 
 const middleware = [thunk, createLogger];
 
-let store = createStore(rootReducer,
+const enhancer = compose(
+  applyMiddleware(...middleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f);
+
+let store = createStore(rootReducer, {});
 
 render(
   <Provider store={store}>
